@@ -1,10 +1,10 @@
 package lab02_;
 
 public class Seguradora {
-	String _nome;
-	String _telefone;
-	String _email;
-	String _endereco;
+	private String _nome;
+	private String _telefone;
+	private String _email;
+	private String _endereco;
 	
 	//constutor
 	public Seguradora(String nome,String telefone,String email,String endereco){
