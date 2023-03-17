@@ -56,7 +56,7 @@ public class Sinistro {
       
       //
       public int na_lista(int i,int[] v) {
-    	  //retorna 1 se estiver na lista,0 caso contrario
+    	  //retorna 1 se i estiver na lista,0 caso contrario
     	  for(int j = 0;j < v.length;j++) {
     		  if(i == v[j]) {
     			  return 1;
@@ -76,6 +76,7 @@ public class Sinistro {
     			  break;
     		  }
     	  }
+    	  System.out.println("O número máximo de objetos(999) da classe Sinistro foi atingido.");
     	  return id;
       }
 }
