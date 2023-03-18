@@ -55,34 +55,36 @@ public class Cliente {
 	//toString
 	public String toString() {
 		//
-		NumberFormat fmt = NumberFormat.getNumberInstance();
+		
 		return "{Nome: " + _nome + " / CPF: " + _cpf + " / DataNascimento: " + _dataNascimento + " / Idade: " + _idade + " / Endereco: " + _endereco + "}";		
 	}
 	//validarCPF
 	public boolean validarCPF(String cpf) {
 		//r é o cpf mas com apenas numeros
-		String r = cpf.replaceAll("[.-]+","");
+		String r = cpf.replaceAll("[\\s.-]+","");
 		//
 		if(r.length() != 11) {
+			//System.out.println("---1");
 			return false;
 		}
 		//forma para verificar se o cpf tem todos os digitos iguais
 		String s = "";
 		int c = 0;
 		for(int i = 0;i < r.length();i++) {
-			s = r.substring(i, i+1);
+			s = r.substring(0, 1);
 			if(i != 0 && r.substring(i, i+1).equals(s)){
 				//
 				c++;
 			}
 		}
 		if(c == r.length() -1) {
+			//System.out.println("---2");
 			return false;
 		}
 		//calculo dos digitos verificadores:
 		//passar os  digitos para um vetor como inteiros
 		int[] v = new int[11];
-		for(int i = 0;i < 9;i++) {
+		for(int i = 0;i < 11;i++) {
 			v[i] = Integer.parseInt(r.substring(i, i+1));
 		}
 		//implementação do primeiro algoritmo 
@@ -105,6 +107,7 @@ public class Cliente {
 		}
 		else if(v[9] != prim){
 			//o 10 digito do cpf não está de acordo com o algoritmo
+			//System.out.println("---3");
 			return false;
 		}
 		mult = 10;
@@ -127,17 +130,10 @@ public class Cliente {
 		}
 		else if(v[10] != sec){
 			//o 11 digito do cpf não está de acordo com o algoritmo
+			//System.out.println("---4");
 			return false;
-		}
-	
-		
-		
-		
-		
-		
-		
-		return true;
-		
+		}		
+		return true;	
 		
 	}
 }
