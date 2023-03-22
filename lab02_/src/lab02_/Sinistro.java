@@ -68,7 +68,13 @@ public class Sinistro {
       public int gerar_id(){
     	  //aqui eu procuro um id aleatório até chegar em algum que não esteja em vetor_id
     	  int id = -1;
+    	  
     	  while(true) {
+    		  if(vetor_id[998] != 0) {
+    			  //proteção pra não cair em um loop infinito caso os ids estejam estejam preenchidos de 1-999
+    			  System.out.println("Numero maximo de objetos instanciados atingido");
+    			  break;
+    		  }
     		  Random x = new Random();
     		  int r = x.nextInt(999);
     		  if(na_lista(r,vetor_id) == 0) {
@@ -76,7 +82,7 @@ public class Sinistro {
     			  break;
     		  }
     	  }
-    	  System.out.println("O número máximo de objetos(999) da classe Sinistro foi atingido.");
+    	  
     	  return id;
       }
 }
