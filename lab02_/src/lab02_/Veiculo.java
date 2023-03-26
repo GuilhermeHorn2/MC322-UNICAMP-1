@@ -6,6 +6,7 @@ public class Veiculo {
 	private String _modelo;
 	
 	//contrutores:
+	
 	public Veiculo() {}
 	public Veiculo(String placa,String marca,String modelo) {
 		_placa = placa;
@@ -14,6 +15,7 @@ public class Veiculo {
 	}
 	
 	//gets
+	
 	public String getPlaca(){
 		return _placa;
 	}
@@ -25,6 +27,7 @@ public class Veiculo {
 	}	
 	
 	//sets
+	
 	public void setPlaca(String placa) {
 		_placa = placa;
 	}

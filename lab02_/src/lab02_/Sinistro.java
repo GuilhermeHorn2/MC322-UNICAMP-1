@@ -6,18 +6,22 @@ public class Sinistro {
       private int _id;
       private String _data;
       private String _endereco;
+      
       //é preciso de um contador para colocar os ids no vetor_id
       
       private static int contador = 0;
+      
       //vou assumir 999 como o numero maximo de objetos e ids que podem ser gerados
       
       private static int[] vetor_id = new int[999];
       
 
       //construtor
+      
       public Sinistro(String data,String endereco) {
     	  _data = data;
     	  _endereco = endereco;
+    	  
     	  //para criar um objeto: Sinistro s = new Sinistro(data,endereco)
     	  
     	  _id = gerar_id();
@@ -32,6 +36,7 @@ public class Sinistro {
       }
       
       //get
+      
       public String getData() {
     	  //
     	  return _data;
