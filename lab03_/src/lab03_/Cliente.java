@@ -8,7 +8,7 @@ public class Cliente {
    private String _educacao;
    private String _genero;
    private String _classeEconomica;
-   private static ArrayList<Veiculo> listaVeiculos = new ArrayList<>();
+   private static ArrayList<Veiculo> ListaVeiculos = new ArrayList<>();
    
    /*construtor*/
    
@@ -23,10 +23,63 @@ public class Cliente {
    }
    
    /*gets*/
+   public int getNumeroVeiculos() {
+	   return ListaVeiculos.size();
+   }
    
-   
+   public Veiculo getVeiculo(int i) {
+	   //
+	   if(ListaVeiculos.size() < i) {
+		   System.out.println("Esse cliente não possuí "+ i + " veículos");
+		   return null;
+	   }
+	   return ListaVeiculos.get(i-1);
+   }
+   public String getNome() {
+	   return _nome;
+   }
+   public String getEndereco() {
+	   return _endereco;
+   }
+   public String getDataLicensa() {
+	   //quero retornar algo do tipo:xx/xx/xxxx
+	   return _dataLicensa.getDate();
+   }
+   public String getEducacao() {
+	   return _educacao;
+   }   
+   public String getGenero() {
+	   return _endereco;
+   }   
+   public String getClasseEconomica() {
+	   return _endereco;
+   }  
    /*sets*/
-   
-   
+   public void setVeiculo(Veiculo v) {
+	   ListaVeiculos.add(v);	
+   }
+   public void setNome(String nome) {
+	   _nome = nome;
+   }
+   public void setEndereco(String endereco) {
+	   _endereco = endereco;
+   }   
+   public void setDataLicensa(String data) {
+	   _dataLicensa.setDate(data);
+   }   
+   public void setEducacao(String educacao) {
+	   _educacao = educacao;
+   }   
+   public void setClasseEconomica(String classeEconomica) {
+	   _classeEconomica = classeEconomica;
+   }
    /*toString*/
+   public String toString() {
+	    //printar os carros do cliente:
+	   for(int i = 0;i < ListaVeiculos.size();i++) {
+		   System.out.print("Veículo de número" + i+1 + ": ");
+		   System.out.print(ListaVeiculos.get(i));
+	   }
+		return "{Nome: " + _nome + "/ Endereco: " + _endereco + "/ dataLicensa: " + _dataLicensa + "/ Educação: " + _educacao + "/Classe Ecnonômica: " + _classeEconomica;
+	}   
 }
