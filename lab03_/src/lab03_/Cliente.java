@@ -13,27 +13,19 @@ public class Cliente {
    /*construtor*/
    
    /*a lista de veiculos não começará com nenhum valor,mas atravez do set ela pode ser modificada,pode ser consultado no get*/
-   public Cliente(String nome,String endereco,Date dataLicensa,String educacao,String genero,String classeEconomica) {
+   public Cliente(String nome,String endereco,Date dataLicensa,String educacao,String genero,String classeEconomica,Veiculo v) {
 	   _nome = nome;
 	   _endereco = endereco;
 	   _dataLicensa = dataLicensa;
 	   _educacao = educacao;
 	   _genero = genero;
 	   _classeEconomica = classeEconomica;
+	   ListaVeiculos.add(v);
    }
    
    /*gets*/
-   public int getNumeroVeiculos() {
-	   return ListaVeiculos.size();
-   }
-   
-   public Veiculo getVeiculo(int i) {
-	   //
-	   if(ListaVeiculos.size() < i) {
-		   System.out.println("Esse cliente não possuí "+ i + " veículos");
-		   return null;
-	   }
-	   return ListaVeiculos.get(i-1);
+   public ArrayList getListaVeiculos() {
+	   return ListaVeiculos;
    }
    public String getNome() {
 	   return _nome;
@@ -54,7 +46,9 @@ public class Cliente {
    public String getClasseEconomica() {
 	   return _endereco;
    }  
+   
    /*sets*/
+   
    public void setVeiculo(Veiculo v) {
 	   ListaVeiculos.add(v);	
    }
@@ -73,7 +67,9 @@ public class Cliente {
    public void setClasseEconomica(String classeEconomica) {
 	   _classeEconomica = classeEconomica;
    }
+   
    /*toString*/
+   
    public String toString() {
 	    //printar os carros do cliente:
 	   for(int i = 0;i < ListaVeiculos.size();i++) {

@@ -5,6 +5,7 @@ public class Veiculo {
 	private String _marca;
 	private String _modelo;
     private int _anoFabricacao;	
+    
 	/*Contrutores*/
 	
 	public Veiculo() {};
