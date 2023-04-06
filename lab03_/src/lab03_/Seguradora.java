@@ -116,14 +116,14 @@ public class Seguradora {
 		return gerou;
 		
 	}
-	public boolean visualizarSinistro(String cliente) {
+	public boolean visualizarSinistro(Cliente cliente) {
 		//
 		boolean visualizou = false;
 		
-		for(int i = 0;i < listaClientes.size();i++) {
-			if(listaClientes.get(i).equals(cliente)) {
+		for(int i = 0;i < listaSinistros.size();i++) {
+			if(listaSinistros.get(i).getCliente().equals(cliente)) {
 				visualizou = true;
-				System.out.println(cliente);
+				System.out.println(listaSinistros.get(i));
 				break;
 			}
 		}
