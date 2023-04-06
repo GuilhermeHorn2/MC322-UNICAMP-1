@@ -49,8 +49,8 @@ public class Cliente {
    
    /*sets*/
    
-   public void setVeiculo(Veiculo v) {
-	   ListaVeiculos.add(v);	
+   public void setVeiculo(Veiculo v,int i) {
+	   ListaVeiculos.set(i,v);	
    }
    public void setNome(String nome) {
 	   _nome = nome;
@@ -68,6 +68,7 @@ public class Cliente {
 	   _classeEconomica = classeEconomica;
    }
    
+   
    /*toString*/
    
    public String toString() {
@@ -76,6 +77,6 @@ public class Cliente {
 		   System.out.print("Veículo de número" + i+1 + ": ");
 		   System.out.print(ListaVeiculos.get(i));
 	   }
-		return "{Nome: " + _nome + "/ Endereco: " + _endereco + "/ dataLicensa: " + _dataLicensa + "/ Educação: " + _educacao + "/Classe Ecnonômica: " + _classeEconomica;
+		return "{Nome: " + _nome + "/ Endereco: " + _endereco + "/ dataLicensa: " + _dataLicensa + "/ Educação: " + _educacao + "/Classe Ecnonômica: " + _classeEconomica + "}";
 	}   
 }
