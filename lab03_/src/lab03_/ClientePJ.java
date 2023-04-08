@@ -2,6 +2,7 @@ package lab03_;
 
 public class ClientePJ extends Cliente {
 	
+	
 	private String _cnpj;
 	private Date _dataFundacao;
 

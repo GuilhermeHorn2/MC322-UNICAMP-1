@@ -1,7 +1,7 @@
 package lab03_;
 
 public class ClientePF extends Cliente {
-	
+
 	private String _cpf;//cpf final
 	private Date _dataNascimento;
 
