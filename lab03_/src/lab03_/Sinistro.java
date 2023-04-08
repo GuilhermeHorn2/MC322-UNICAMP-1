@@ -64,7 +64,7 @@ public class Sinistro {
 	/*toString*/
 	
 	public String toString() {
-		return "{ID: " + _id + "/ Data: " + _data + "/ Endereço: " + _endereco + "/ Seguradora: " + _seguradora + "/ Veiculo: " + _veiculo + "/ Cliente:" + _cliente +"}";
+		return "{ID: " + _id + "/ Data: " + _data + "/ Endereco: " + _endereco + "/ Seguradora: " + _seguradora + "/ Veiculo: " + _veiculo + "/ Cliente:" + _cliente +"}";
 	}
 
 }

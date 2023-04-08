@@ -38,7 +38,7 @@ public class ClientePJ extends Cliente {
 	
 	/*Validar Cnpj*/
 	
-	private  boolean validar_cnpj(String c) {
+	public  boolean validar_cnpj(String c) {
 	/*Tirar . e -*/
 	c = c.replaceAll("[\\s.-]+","");
 		
@@ -107,7 +107,7 @@ public class ClientePJ extends Cliente {
 	/*toString*/
 	
 	public String toString() {
-		return "{Cnpj: " + _cnpj + "/ Data de Fundação: " + _dataFundacao + "}";
+		return "{Cnpj: " + _cnpj + "/ Data de Fundacao: " + _dataFundacao + "}";
 	}
 	
 	

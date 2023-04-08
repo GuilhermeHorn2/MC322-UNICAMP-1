@@ -76,10 +76,10 @@ public class Seguradora {
 	
 	/*Sinistro*/
 	
-	public boolean gerarSinistro(String data,String endereco,Veiculo v,Cliente c) {
+	public boolean gerarSinistro(String data,String endereco,Veiculo v,Cliente c,Seguradora essa) {
 		boolean gerou = false;
 		
-		Seguradora essa = new Seguradora(_nome,_telefone,_email,_endereco);//copiar a seguradora 
+		//Seguradora essa = new Seguradora(_nome,_telefone,_email,_endereco);//copiar a seguradora 
 		int id = listaSinistros.size();//gerar id
 		
 		/*checar se o veiculo e o cliente estão cadastrados na seguradora*/
@@ -133,6 +133,12 @@ public class Seguradora {
 	
 	public ArrayList listarSinistros() {
 		return listaSinistros;
+	}
+	
+	/*toString*/
+	
+	public String toString() {
+		return "{"+ "Nome: " + _nome + "/ " + "Telfone: "+_telefone+"/ "+"Endereco: " + _endereco +"/ " + "Endereco: " + _endereco+"}";
 	}
 
 }

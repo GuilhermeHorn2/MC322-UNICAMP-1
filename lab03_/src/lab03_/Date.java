@@ -34,5 +34,10 @@ public class Date {
 			}
 		}
 	}
+	
+    /*toString*/
+	public String toString() {
+		return s[0]+"/"+s[1]+"/"+s[2];
+	}
 
 }

@@ -49,7 +49,7 @@ public class Veiculo {
 	/*toString*/
 	
 	public String toString() {
-		return "{Placa: " + _placa + "/ Marca: " + _marca + "/ Modelo: " + _modelo + "/ Ano de Fabricação: " + _anoFabricacao;
+		return "{Placa: " + _placa + "/ Marca: " + _marca + "/ Modelo: " + _modelo + "/ Ano de Fabricacao: " + _anoFabricacao;
 	}
 
 
