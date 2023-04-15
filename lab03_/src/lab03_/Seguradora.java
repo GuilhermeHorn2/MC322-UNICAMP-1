@@ -80,7 +80,7 @@ public class Seguradora {
 		boolean gerou = false;
 		
 		//Seguradora essa = new Seguradora(_nome,_telefone,_email,_endereco);//copiar a seguradora 
-		int id = listaSinistros.size();//gerar id
+		int id = listaSinistros.size()+1;//gerar id
 		
 		/*checar se o veiculo e o cliente estão cadastrados na seguradora*/
 		

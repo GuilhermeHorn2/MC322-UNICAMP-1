@@ -2,8 +2,9 @@ package lab03_;
 
 public class ClientePF extends Cliente {
 
-	private String _cpf;//cpf final
+	private final String _cpf;//cpf final
 	private Date _dataNascimento;
+
 
 	
 	public ClientePF(String nome, String endereco, Date dataLicensa, String educacao, String genero,
@@ -26,11 +27,7 @@ public class ClientePF extends Cliente {
 	
 	/*sets*/
 	
-	public void setCpf(String cpf) {
-		//vai que a pessoa digitou errado
-		_cpf = cpf;
-	}
-	
+
 	public void setDataNascimento(String Date) {
 		//vai que a pessoa digitou errado
 		_dataNascimento.setDate(Date);

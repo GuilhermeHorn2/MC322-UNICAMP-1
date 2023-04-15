@@ -3,7 +3,7 @@ package lab03_;
 public class ClientePJ extends Cliente {
 	
 	
-	private String _cnpj;
+	private final String _cnpj;//cnpj final
 	private Date _dataFundacao;
 
 	
@@ -26,11 +26,7 @@ public class ClientePJ extends Cliente {
 	}
 	
 	/*sets*/
-	
-	public void setCnpj(String cnpj) {
-		//vai que a pessoa digitou errado
-		_cnpj = cnpj;
-	}
+
 	
 	public void setDataFundacao(String Date) {
 		//vai que a pessoa digitou errado

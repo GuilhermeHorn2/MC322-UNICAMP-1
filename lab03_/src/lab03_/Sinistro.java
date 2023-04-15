@@ -1,7 +1,7 @@
 package lab03_;
 
 public class Sinistro {
-	private int _id;
+	private final int _id;
 	private String _data;
 	private String _endereco;
 	private Seguradora _seguradora;
@@ -42,9 +42,6 @@ public class Sinistro {
 	
 	/*sets*/
 	
-	public void setId(int id) {
-		_id = id;
-	}
 	public void setData(String data) {
 		_data = data;
 	}
