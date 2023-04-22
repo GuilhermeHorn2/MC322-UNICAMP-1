@@ -40,7 +40,7 @@ public class main {
 		
 		s.cadastrarCliente(c1);
 		s.cadastrarCliente(c2);
-		System.out.println(s.listarClientes(""));
+		System.out.println(s.listarClientes(""));//aqui eu quero listar todos os clientes
 		
 		/*validar cpf*/
 		

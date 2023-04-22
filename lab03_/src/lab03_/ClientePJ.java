@@ -100,7 +100,7 @@ public class ClientePJ extends Cliente {
 		return true;
 	}	
 	
-	
+
 	/*toString*/
 	
 	public String toString() {
