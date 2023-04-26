@@ -3,6 +3,7 @@ package lab04_;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 public class Seguradora {
 	private String _nome;
 	private String _telefone;
@@ -12,6 +13,7 @@ public class Seguradora {
 	private static ArrayList<Cliente> listaClientes = new ArrayList<>();
 	
 	private static HashMap<Cliente,Double> precoSeguro = new HashMap<>();
+	private int inst = 0;
 	
 	/*construtor*/
 	
@@ -20,6 +22,14 @@ public class Seguradora {
 		_telefone = telefone;
 		_email = email;
 		_endereco = endereco;
+		
+		inst = 1;
+	}
+	
+	public Seguradora() {}
+	
+	public int get_inst(){
+		return inst;
 	}
 	
 	/*gets*/
@@ -35,6 +45,9 @@ public class Seguradora {
 	}
 	public String getEndereco() {
 		return _endereco;
+	}
+	public HashMap<Cliente,Double> get_preco_seguro(){
+		return precoSeguro;
 	}
 	
 	/*sets*/
@@ -54,8 +67,9 @@ public class Seguradora {
 	
 	/*Cliente*/
 	
-	public void cadastrarCliente(Cliente c) {
+	public boolean cadastrarCliente(Cliente c) {
 		listaClientes.add(c);
+		return true;
 	}
 	public boolean removerCliente(String c) {
          		
@@ -73,8 +87,22 @@ public class Seguradora {
 		return removeu;
 		
 	}
-	public ArrayList listarClientes(String tipoCliente) {
+	public ArrayList clientes() {
 		return listaClientes;
+	}
+	
+	public Cliente index_cliente(int i) {
+		return listaClientes.get(i);
+	}
+	
+	public ArrayList listarClientes(String tipoCliente) {
+		ArrayList<Cliente> tipo = new ArrayList<>();
+		for(int i = 0;i < listaClientes.size();i++){
+			if(listaClientes.get(i).tipo_cliente().equals(tipoCliente)){
+				tipo.add(listaClientes.get(i));
+			}
+		}	
+		return tipo;	
 	}
 	
 	/*Sinistro*/
@@ -134,28 +162,67 @@ public class Seguradora {
 		return visualizou;
 	}
 	
-	public ArrayList listarSinistros() {
+	public ArrayList<Sinistro> listarSinistros() {
 		return listaSinistros;
+	}
+	
+	public ArrayList<Sinistro> sinistros_por_cliente(Cliente c){
+		ArrayList<Sinistro> l = new ArrayList<>();
+		
+		for(int i = 0;i < listaSinistros.size();i++){
+		   if(listaSinistros.get(i).getCliente() == c){
+			   l.add(listaSinistros.get(i));
+		   }
+		}
+		return l;
+	}
+	
+	public ArrayList<Veiculo> veiculos_por_clientes(Cliente c){
+		return c.get_veiculos();
+	}
+	
+	public ArrayList<ArrayList<Veiculo>> veiculos_por_seguradora(){
+		ArrayList<ArrayList<Veiculo>> v = new ArrayList<>();
+		for(int i = 0;i < listaClientes.size();i++) {
+			v.add(listaClientes.get(i).get_veiculos());
+		}
+		return v;
 	}
 	
 	//calcular_preco_seguro_clientes	
 	
-	public void calcular_preco_seguro_clientes(){
-		
-		//return c.calcular_score() * (1 + listaSinistros.size());
-		for(int i = 0;i < listaClientes.size();i++){
-			precoSeguro.put(listaClientes.get(i),listaClientes.get(i).calcular_score() * (1+listaSinistros.size()));
+	public int qtde_sinistros(Cliente c) {
+		int k = 0;
+		for(int i = 0;i < listaSinistros.size();i++){
+			if(listaSinistros.get(i).getCliente() == c){
+				k++;
+			}
 		}
-		
+		return k;
 	}
+	
+     public void calcular_preco_seguro_clientes(){
+    	 for(int i = 0;i < listaClientes.size();i++){
+    		 Cliente c = listaClientes.get(i);
+    		 double x = c.calcular_score() * (1+qtde_sinistros(c));
+    		 c.set_valor(x);
+    	 }
+	}
+     
+
+
+    public double get_preco_seguro(Cliente c){
+    	return precoSeguro.get(c);
+    }
 	
 	//calcular_receita
 	
 	public double calcular_receita(){
 		
 		double receita = 0;
-		for(int i = 0;i < listaClientes.size();i++){
-			receita += precoSeguro.get(listaClientes.get(i));
+		
+		for(int i = 0;i < listaClientes.size();i++) {
+			receita += listaClientes.get(i).get_valor();
 		}
 		return receita;
 	}
@@ -168,10 +235,28 @@ public class Seguradora {
 		for(int i = 0;i < a.get_veiculos().size();i++){
 			b.get_veiculos().add(a.get_veiculos().get(i));
 			a.get_veiculos().remove(i);
-		}
-	
-		
+			
+			//atualizar o preço do seguro dos clientes,chamando calcular_preco_seguro_clientes(),após uma sequencia de operações
+			
+			
+		}		
 	}
+	
+	//remover sinistro
+	
+	public void remover_sinistro(Sinistro s){
+		
+		listaSinistros.remove(s);
+		
+		//atualizar o preço do seguro dos clientes,chamando calcular_preco_seguro_clientes(),após uma sequencia de operações
+	}
+	
+/*toString*/
+	
+	public String toString() {
+		return "{"+ "Nome: " + _nome + "/ " + "Telfone: "+_telefone+"/ "+"Endereco: " + _endereco +"/ " + "Endereco: " + _endereco+"}";
+	}
+	
 	
 
 }

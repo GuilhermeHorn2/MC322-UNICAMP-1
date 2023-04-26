@@ -5,11 +5,11 @@ public class ClientePF extends Cliente{
 	private String genero;
     private Date dataLicensa;
     private String educacao;
-    private Date dataNascimento;
+    private final Date dataNascimento;
     private String classeEconomica;
 	
-	public ClientePF(String nome, String endereco, double valor_seguro, Veiculo v,String cpf,String gen,Date dataL,String edu,Date dataN,String eco) {
-		super(nome, endereco, valor_seguro, v);
+	public ClientePF(String nome, String endereco,String cpf,String gen,Date dataL,String edu,Date dataN,String eco) {
+		super(nome, endereco);
 		_cpf = cpf;
 		genero = gen;
 		dataLicensa = dataL;
@@ -17,6 +17,7 @@ public class ClientePF extends Cliente{
 		dataNascimento = dataN;
 		classeEconomica = eco;
 	}	
+	
 	
 	//gets
 	
@@ -50,9 +51,9 @@ public class ClientePF extends Cliente{
 	public void set_educacao(String e) {
 		educacao = e;
 	}
-	public void set_dataNascimento(Date d) {
+	/*public void set_dataNascimento(Date d) {
 		dataNascimento = d;
-	}
+	}*/
 	public void set_classeEconomica(String c) {
 		classeEconomica = c;
 	}
@@ -65,16 +66,17 @@ public class ClientePF extends Cliente{
 	
 	//calcularScore
 	
-	public int calc_idade(Date d) {
+	public int calc_idade(Date data) {
 		//recebe a data atual
 		
-		int anos = d.get_ano() - dataNascimento.get_ano();
+		int anos = data.get_ano() - this.dataNascimento.get_ano();
 		
-		if(d.get_mes() < dataNascimento.get_mes()) {
+		
+		if(data.get_mes() < this.dataNascimento.get_mes()) {
 			return anos-1;
 		}
-		if(d.get_mes() == dataNascimento.get_mes()) {
-			if(d.get_dia() < dataNascimento.get_dia()) {
+		if(data.get_mes() == this.dataNascimento.get_mes()) {
+			if(data.get_dia() < this.dataNascimento.get_dia()) {
 				return anos-1;
 			}
 		}
@@ -86,7 +88,9 @@ public class ClientePF extends Cliente{
 		CalcSeguro c1 = CalcSeguro.VALOR_BASE;
 		double x = c1.fator;
 		
-		int idade = calc_idade(dataNascimento);
+		Date atual = new Date("26","04","2023");
+		int idade = calc_idade(atual);
+		
 		
 		CalcSeguro c2;
 		if(idade >= 18 && idade < 30) {
@@ -108,5 +112,10 @@ public class ClientePF extends Cliente{
 		
 	}
 	
+	//tipo cliente
+	
+	public String tipo_cliente(){
+		return "PF";
+	}
 
 }

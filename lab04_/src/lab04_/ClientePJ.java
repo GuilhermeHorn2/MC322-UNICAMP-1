@@ -6,8 +6,8 @@ public class ClientePJ extends Cliente{
 	private Date dataFundacao;
 	private int qtdeFuncionarios;
 	
-	public ClientePJ(String nome, String endereco, double valor_seguro, Veiculo v,String cnpj,Date fund,int qtde) {
-		super(nome, endereco, valor_seguro, v);
+	public ClientePJ(String nome, String endereco,String cnpj,Date fund,int qtde) {
+		super(nome, endereco);
 		_cnpj = cnpj;
 		dataFundacao = fund;
 		qtdeFuncionarios = qtde;
@@ -41,11 +41,17 @@ public class ClientePJ extends Cliente{
 	
 	//calcular score
 	
-	public double calcula_score(){
+	public double calcular_score(){
 		CalcSeguro c = CalcSeguro.VALOR_BASE;
 		double x = c.fator;
 		double y = 1 + (qtdeFuncionarios)/100;
 		return x*y*(this.get_veiculos().size());
+	}
+	
+	//tipo cliente
+	
+	public String tipo_cliente(){
+		return "PJ";
 	}
 
 }

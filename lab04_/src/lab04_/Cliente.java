@@ -10,13 +10,13 @@ public class Cliente {
     private double _valor_seguro;
    
     
-    //constructor
+    //construtor
     
-    public Cliente(String nome,String endereco,double valor_seguro,Veiculo v) {
+    public Cliente(String nome,String endereco) {
     	_nome = nome;
     	_endereco = endereco;
-    	_valor_seguro = valor_seguro;
-    	veiculos.add(v);
+    	//_valor_seguro = valor_seguro;
+    	//veiculos.add(v);
     }
     
     //gets
@@ -31,6 +31,10 @@ public class Cliente {
     
     public ArrayList get_veiculos() {
     	return veiculos;
+    }
+    
+    public Veiculo get_veiculo(int idx) {
+    	return veiculos.get(idx);
     }
     
     public double get_valor() {
@@ -56,5 +60,22 @@ public class Cliente {
     public double calcular_score(){
          return 0;
     }
+    
+    //tipo cliente
+    
+    public String tipo_cliente() {
+    	return "";
+    }
+    
+    //remover veiculo
+    
+    public void remover_veiculo(int idx) {
+    	veiculos.remove(idx);
+    }
 	
+    //add veiculo
+    
+    public void add_veiculo(Veiculo v) {
+    	veiculos.add(v);
+    }
 }
