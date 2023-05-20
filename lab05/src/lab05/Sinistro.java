@@ -16,6 +16,10 @@ public class Sinistro {
 		_seguro = seguro;
 	}
 	
+	public int get_id() {
+		return _id;
+	}
+	
 	public Date get_data(){
 		return _data;
 	}
@@ -41,4 +45,16 @@ public class Sinistro {
 	public void set_seguro(Seguro seguro){
 		_seguro = seguro;
 	}
+	
+	public String toString(){
+		
+		StringBuilder res = new StringBuilder();
+		res.append("id: " + this.get_id());
+		res.append("/Data: " + this.get_data());
+		res.append("/Endereco: " + this.get_endereco());
+		res.append("/Condutor: " + this.get_condutor());
+		res.append("/Seguro: " + this.get_seguro());
+		return res.toString();
+	}
+	
 }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Frota {
 	
 	private String _code;
-	private ArrayList<Veiculo> listaVeiculo;
+	private ArrayList<Veiculo> listaVeiculo = new ArrayList<>();
 	
 	public Frota(String code){
 		_code = code;

@@ -10,14 +10,14 @@ public abstract class Seguro {
 	private Seguradora seguradora;
 	protected ArrayList<Sinistro> listaSinistros;
 	protected ArrayList<Condutor> listaCondutores;
-	private int valorMensal;
+	private double valorMensal;
 	
-	public Seguro(int id,Date inicio,Date fim,Seguradora seg,int valor) {
+	public Seguro(int id,Date inicio,Date fim,Seguradora seg) {
 		_id = id;
 		datainicio = inicio;
 		datafim = fim;
 		seguradora = seg;
-		valorMensal = valor;
+		//valorMensal = valor;
 		listaSinistros = new ArrayList<>();
 		listaCondutores = new ArrayList<>();
 	}
@@ -40,7 +40,7 @@ public abstract class Seguro {
 	public ArrayList<Condutor> get_listaCondutores(){
 		return listaCondutores;
 	}
-	public int get_valorMensal() {
+	public double get_valorMensal() {
 		return valorMensal;
 	}
 	
@@ -54,15 +54,34 @@ public abstract class Seguro {
 	public void set_seguradora(Seguradora s){
 		seguradora = s;
 	}
-	public void set_valorMensal(int valor) {
-		valor =  valorMensal;
+	public void set_valorMensal(double valor) {
+		valorMensal = valor;
+	}
+	
+	
+	public int calc_idade(Date data,Date Nasc) {
+		//recebe a data atual e a data de nascimento
+		
+		int anos = data.get_ano() - Nasc.get_ano();
+		
+		
+		if(data.get_mes() < Nasc.get_mes()) {
+			return anos-1;
+		}
+		if(data.get_mes() == Nasc.get_mes()) {
+			if(data.get_dia() < Nasc.get_dia()) {
+				return anos-1;
+			}
+		}
+		return anos;
+		
 	}
 	
 	public abstract boolean autorizarCondutor(Condutor c);
 	public abstract boolean desautorizarCondutor(Condutor c);
-	protected abstract double calcularValor(Date atual);
-	public abstract void gerarSinistro(); 
-	
+	public abstract double calcularValor(Date atual);
+	public abstract void gerarSinistro(Date data,String endereco,Condutor condutor); 
+	public abstract int get_type();
 	
 	
 }

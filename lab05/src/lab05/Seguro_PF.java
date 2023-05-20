@@ -6,8 +6,8 @@ public class Seguro_PF extends Seguro {
 	private Cliente_PF _cliente;
 	
 
-	public Seguro_PF(Veiculo veiculo,Cliente_PF cliente,int id, Date inicio, Date fim, Seguradora seg, int valor) {
-		super(id, inicio, fim, seg, valor);
+	public Seguro_PF(Veiculo veiculo,Cliente_PF cliente,int id, Date inicio, Date fim, Seguradora seg) {
+		super(id, inicio, fim, seg);
 		_veiculo = veiculo;
 		_cliente = cliente;
 	}
@@ -26,98 +26,11 @@ public class Seguro_PF extends Seguro {
 		_cliente = c;
 	}
 	
-	public boolean check_cpf(String cpf) {
-		
-		//r é o cpf mas com apenas numeros
-		String r = cpf.replaceAll("[\\s.-]+","");
-		//
-		if(r.length() != 11) {
-			return false;
-		}
-		
-		//forma para verificar se o cpf tem todos os digitos iguais
-		String s = "";
-		int c = 0;
-		for(int i = 0;i < r.length();i++) {
-			s = r.substring(0, 1);
-			if(i != 0 && r.substring(i, i+1).equals(s)){
-				c++;
-			}
-		}
-		if(c == r.length() -1) {
-			return false;
-		}
-		
-		//calculo dos digitos verificadores:
-		
-		//passar os  digitos para um vetor como inteiros
-		int[] v = new int[11];
-		for(int i = 0;i < 11;i++) {
-			v[i] = Integer.parseInt(r.substring(i, i+1));
-		}
-		
-		//implementação do primeiro algoritmo 
-		int prim = 0;//checando os digitos de 1 até 9
-		int mult = 10;//multiplicador
-		for(int i = 0;i < 9;i++){
-			prim += v[i]*mult;
-			mult--;
-		}
-		if(prim % 11 == 0 || prim % 11 == 1) {
-			prim = 0;
-		}
-		else if(prim % 11 != 0 || prim % 11 != 1) {
-			prim = 11 - prim%11;
-		}
-		//checando:
-		
-		if(v[9] == prim) {
-			return true;
-		}
-		else if(v[9] != prim){
-			//o 10 digito do cpf não está de acordo com o algoritmo
-			
-			return false;
-		}
-		mult = 10;
-		//implementação do segundo algoritmo
-		
-		int sec = 0;//checando do 2 até o 10
-		for(int i = 1;i < 10;i++) {
-			//
-			sec += v[i]*mult;
-			mult--;
-		}
-		if(sec % 11 == 0 || sec % 11 == 1) {
-			sec = 0;
-		}
-		else if(sec % 11 != 0 || sec % 11 != 1){
-			sec = 11 - sec%11;
-		}
-		//checando:
-		
-		if(v[10] == sec) {
-			return true;
-		}
-		else if(v[10] != sec){
-			//o 11 digito do cpf não está de acordo com o algoritmo
-			
-			return false;
-		}		
-		return true;
-		
-		
-	}
 	
 	@Override
 	public boolean autorizarCondutor(Condutor c) {
-		boolean aut = false;
-		if(this.check_cpf(c.get_cpf())){
-			//talvez validar o telefone tbm,mas o nome n sei,o Elon Musk colocou o nome do filho com numeros lá,vai saber
-			listaCondutores.add(c);
-			aut = true;
-		}
-		return aut;
+		listaCondutores.add(c);
+		return true;
 	}
 
 	@Override
@@ -134,33 +47,17 @@ public class Seguro_PF extends Seguro {
 		return false;
 	}
 	
-	public int calc_idade(Date data,Date Nasc) {
-		//recebe a data atual e a data de nascimento
-		
-		int anos = data.get_ano() - Nasc.get_ano();
-		
-		
-		if(data.get_mes() < Nasc.get_mes()) {
-			return anos-1;
-		}
-		if(data.get_mes() == Nasc.get_mes()) {
-			if(data.get_dia() < Nasc.get_dia()) {
-				return anos-1;
-			}
-		}
-		return anos;
-		
-	}
+
 
 	@Override
-	protected double calcularValor(Date atual) {
-		
+	public double calcularValor(Date atual) {
+		//atual é a data do momento em que o valor é calculado
 		int idade = calc_idade(atual,_cliente.get_dataNasc());
 		int qnt_veiculos = _cliente.get_lista_veiculos().size();
 		int qnt_sinistros_cliente = listaSinistros.size();
 		int qnt_sinistro_condutor = 0;
 		
-		//Qnt de sinistros para os condutores registrados no segurop
+		//Qnt de sinistros para os condutores registrados no seguro
 		for(int i = 0;i < listaCondutores.size();i++) {
 			Condutor c = listaCondutores.get(i);
 			qnt_sinistro_condutor += c.get_listaSinistros().size();
@@ -182,9 +79,30 @@ public class Seguro_PF extends Seguro {
 	}
 
 	@Override
-	public void gerarSinistro() {
-		// TODO Auto-generated method stub
+	public void gerarSinistro(Date data,String endereco,Condutor condutor){
+		int id = listaSinistros.size();
+		Sinistro novo = new Sinistro(id,data,endereco,condutor,this);
+		listaSinistros.add(novo);
+		condutor.get_listaSinistros().add(novo);
 		
+	}
+	
+	public String toString(){
+		
+		StringBuilder res = new StringBuilder();
+		res.append("id: " + this.get_id());
+		res.append("/data incio: " + this.get_datainicio());
+		res.append("/data fim: " + this.get_datafim());
+		res.append("/Seguradora: " + this.get_seguradora());
+		res.append("/Veiculo: " + this.get_veiculo());
+		res.append("/cliente:" + this.get_cliente());
+		return res.toString();
+	}
+
+	@Override
+	public int get_type() {
+		// PF --> 1
+		return 1;
 	}
 
 }

@@ -62,30 +62,18 @@ public class Cliente_PF extends Cliente{
 		return rmv;
 	} 
 	
-	public boolean atualizar_veiculo(Veiculo v,String tipo,String dado) {
-		//tipo é o tipo da mudança,o dado e oque vai entrar no lugar do campo antigo
+	public String toString(){
 		
-		boolean atl = false;
-		
-		if(tipo.equals("placa")){
-			v.set_placa(dado);
-			atl = true;
-		}
-		if(tipo.equals("marca")) {
-			v.set_marca(dado);
-			atl = true;
-		}
-		if(tipo.equals("modelo")) {
-			v.set_modelo(dado);
-			atl = true;
-		}
-		if(tipo.equals("email")) {
-			v.set_email(dado);
-			atl = true;
-		}
-		
-		return atl;
-		
+		StringBuilder res = new StringBuilder();
+		res.append("nome: " + this.get_nome());
+		res.append(" / telefone: " + this.get_telefone());
+		res.append(" / endereco: " + this.get_endereco());
+		res.append(" / email: " + this.get_email());
+		res.append(" / cpf: " + this.get_cpf());
+		res.append(" / genero:" + this.get_genero());
+		res.append(" / educacao: " + this.get_educacao());
+		res.append(" / data Nascimento: " + this.get_dataNasc());
+		return res.toString();
 	}
 
 	@Override

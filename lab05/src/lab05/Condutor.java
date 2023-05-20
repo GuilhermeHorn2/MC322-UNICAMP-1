@@ -9,7 +9,7 @@ public class Condutor {
 	private String _endereco;
 	private String _email;
 	private Date _dataNasc;
-	private ArrayList<Sinistro> listaSinistros;
+	private ArrayList<Sinistro> listaSinistros = new ArrayList<>();
 	
 	public Condutor(String cpf,String nome,String telefone,String endereco,String email,Date dataNasc) {
 		_cpf = cpf;
@@ -63,6 +63,17 @@ public class Condutor {
 		listaSinistros.add(s);
 	}
 	
-	
+public String toString(){
+		
+		StringBuilder res = new StringBuilder();
+		res.append("nome: " + this.get_nome());
+		res.append("/telefone: " + this.get_telefone());
+		res.append("/endereco: " + this.get_endereco());
+		res.append("/email: " + this.get_email());
+		res.append("/cpf: " + this.get_cpf());
+		res.append("/email:" + this.get_email());
+		res.append("/data Nascimento:" + this.get_dataNasc());
+		return res.toString();
+	}
 
 }

@@ -5,13 +5,13 @@ public class Veiculo {
 	private String _placa;
 	private String _marca;
 	private String _modelo;
-	private String _email;
+	private int anoFabricacao;
 	
-	public Veiculo(String placa,String marca,String modelo,String email){
+	public Veiculo(String placa,String marca,String modelo,int ano){
 		_placa = placa;
 		_marca = marca;
 		_modelo = modelo;
-		_email = email;
+		anoFabricacao = ano;
 	}
 	
 	public String get_placa() {
@@ -23,8 +23,8 @@ public class Veiculo {
 	public String get_modelo() {
 		return _modelo;
 	}
-	public String get_email() {
-		return _email;
+	public int get_anoFabricacao() {
+		return anoFabricacao;
 	}
 	
 	public void set_placa(String placa) {
@@ -36,8 +36,18 @@ public class Veiculo {
 	public void set_modelo(String modelo) {
 		_modelo = modelo;
 	}
-	public void set_email(String email) {
-		_email = email;
+	public void set_anoFabricacao(int ano) {
+		anoFabricacao = ano;
+	}
+	
+public String toString(){
+		
+		StringBuilder res = new StringBuilder();
+		res.append("Placa: " + this.get_placa());
+		res.append("/Marca: " + this.get_marca());
+		res.append("/Modelo: " + this.get_modelo());
+		res.append("/ano Fabricacao: " + this.get_anoFabricacao());
+		return res.toString();
 	}
 
 }
