@@ -1,6 +1,9 @@
 package lab05;
 
 import java.util.ArrayList;
+import java.util.Scanner;
+
+
 
 public class AppMain {
 	
@@ -269,6 +272,576 @@ public class AppMain {
 		
 		//calcular receita
 		System.out.println(seguradora.calcular_receita());
+		
+	}
+	public static void menu() {
+		MenuOperacoes op1 = MenuOperacoes.CADASTROS;
+		MenuOperacoes op2 = MenuOperacoes.LISTAR;
+		MenuOperacoes op3 = MenuOperacoes.EXCLUIR;
+		MenuOperacoes op4 = MenuOperacoes.GERAR_SINISTRO;
+		MenuOperacoes op5 = MenuOperacoes.TRANSFERIR_SEGURO;
+		MenuOperacoes op6 = MenuOperacoes.CALCULAR_RECEITA_SEGURADORA;
+		MenuOperacoes op0 = MenuOperacoes.SAIR;
+		
+		while(true) {
+			System.out.println("Operacao(0 para sair): ");
+			Scanner sc1 = new Scanner(System.in);
+			int x = sc1.nextInt();
+			
+			Seguradora s = new Seguradora("54.812.000.0001-15");
+			
+			if(x == op0.getOperacao()){
+				break;
+			}
+			if(x == op1.getOperacao()){
+				//CADASTROS:
+				while(true) {
+					
+					System.out.println("CADASTRAR(4 para voltar):");
+					Scanner sc2 = new Scanner(System.in);
+					int x1 = sc2.nextInt();
+					//Seguradora s = new Seguradora();
+					if(x1 == 4) {
+						break;
+					}
+					if(x1 == 1) {
+						//Cadastrar Cliente PF/PJ
+						if(s.get_inst() == 1){
+							//Para cadastrar um cliente precisa haver uma seguradora						
+							
+							System.out.println("Nome: ");
+					    	Scanner sc10 = new Scanner(System.in);
+					    	String nome = sc10.next();
+					    	
+					    	System.out.println("Endereço: ");
+					    	Scanner sc11 = new Scanner(System.in);
+					    	String end = sc11.next();
+					    	
+					    	System.out.println("Telefone: ");
+					    	Scanner sc12 = new Scanner(System.in);
+					    	String tel = sc12.next();
+					    	
+					    	System.out.println("email: ");
+					    	Scanner sc13 = new Scanner(System.in);
+					    	String email = sc13.next();
+					
+					    	
+							//Cliente c = new Cliente(nome,end,0);
+					    	
+						    System.out.println("PF OU PJ: ");
+						    Scanner sc3 = new Scanner(System.in);
+						    String tipo = sc3.next();
+						    
+						    sc10.close();
+						    sc11.close();
+						    sc3.close();
+						    
+						    if(tipo.equals("PF")){
+						    	System.out.println("CPF: ");
+						    	Scanner sc4 = new Scanner(System.in);
+						    	String cpf = sc4.next();
+						    	
+						    	System.out.println("Genero: ");
+						    	Scanner sc5 = new Scanner(System.in);
+						    	String genero = sc5.next();
+						    	
+						    	System.out.println("Data Nascimento: ");
+						    	Scanner sc6 = new Scanner(System.in);
+						    	String data_str = sc6.next();
+						    	//data_str:xx/xx/xxxx
+						    	Date data = new Date(data_str.substring(0, 1),data_str.substring(3,4),data_str.substring(6,9));
+						    	
+						    	System.out.println("Educacao: ");
+						    	Scanner sc7 = new Scanner(System.in);
+						    	String edu = sc7.next();
+						    	
+						    	System.out.println("Data Nascimento: ");
+						    	Scanner sc8 = new Scanner(System.in);
+						    	String data_str2 = sc8.next();
+						    	//data_str:xx/xx/xxxx
+						    	Date data2 = new Date(data_str2.substring(0, 1),data_str2.substring(3,4),data_str2.substring(6,9));
+						    	
+						    	System.out.println("Classe: ");
+						    	Scanner sc9 = new Scanner(System.in);
+						    	String classe = sc9.next();
+						    	
+						    	Cliente_PF c = new Cliente_PF(cpf,genero,edu,data,nome,tel,end,email);
+						    	s.cadastrar_cliente(c);
+						    	
+						    	sc4.close();
+                                sc5.close();
+                                sc6.close();
+                                sc7.close();
+                                sc8.close();
+                                sc9.close();
+						    }
+						    if(tipo.equals("PJ")){
+						    	System.out.println("CNPJ: ");
+						    	Scanner sc4 = new Scanner(System.in);
+						    	String cnpj = sc4.next();
+						    	
+						    	System.out.println("Data Fundação: ");
+						    	Scanner sc5 = new Scanner(System.in);
+						    	String data_str = sc5.next();
+						    	//data_str:xx/xx/xxxx
+						    	Date data = new Date(data_str.substring(0, 1),data_str.substring(3,4),data_str.substring(6,9));
+						    	
+						    	/*System.out.println("Quantidade de funcionários: ");
+						    	Scanner sc6 = new Scanner(System.in);
+						    	int qtde = sc6.nextInt();*/
+						    	
+						    	Cliente_PJ c = new Cliente_PJ(cnpj,data,nome,tel,end,email);
+						    	s.cadastrar_cliente(c);
+						    	
+						    	sc4.close();
+						    	sc5.close();
+						    	
+						    	
+						    }
+						    
+					}
+						else {
+							System.out.println("Não há seguradora");
+						}
+					
+				}
+				if(x1 == 2) {
+					//Cadastrar Veiculo v no cliente de documento doc,precisa haver uma seguradora cadastrada antes
+					
+					if(s.get_inst() == 1) {
+						//Há seguradora cadastrada
+						
+						System.out.println("Placa: ");
+				    	Scanner sc4 = new Scanner(System.in);
+				    	String placa = sc4.next();
+				    	
+				    	System.out.println("Marca: ");
+				    	Scanner sc5 = new Scanner(System.in);
+				    	String marca = sc5.next();
+				    	
+				    	System.out.println("modelo: ");
+				    	Scanner sc6 = new Scanner(System.in);
+				    	String modelo = sc6.next();
+				    	
+				    	System.out.println("Ano de Fabricação: ");
+				    	Scanner sc7 = new Scanner(System.in);
+				    	int ano = sc7.nextInt();
+				    	
+				    	System.out.println("documento do cliente: ");
+				    	Scanner sc8 = new Scanner(System.in);
+				    	String doc  = sc8.next();
+				    	
+				    	System.out.println("Tipo de cliente(PJ/PF): ");
+				    	Scanner sc9 = new Scanner(System.in);
+				    	String tipo = sc9.next();
+				    	
+				    	Veiculo v = new Veiculo(placa,marca,modelo,ano);
+				    	
+				    	sc4.close();
+                        sc5.close();
+                        sc6.close();
+                        sc7.close();
+                        
+                        if(tipo.equals("PF")){
+                        	
+                        	ArrayList<Cliente> l = s.listar_clientes("PF");
+                        	
+                        	for(int i = 0;i < l.size();i++) {
+                        		
+                        		Cliente_PF c = (Cliente_PF) l.get(i);
+                        		if(c.get_cpf().equals(doc)) {
+                        			c.cadastrar_veiculo(v);
+                        		}
+                        		
+                        	}	
+                        }
+                        
+                        if(tipo.equals("PJ")){
+                        	
+                        	System.out.println("code da frota: ");
+    				    	Scanner sc10 = new Scanner(System.in);
+    				    	String code  = sc10.next();
+                        	
+                        	ArrayList<Cliente> l = s.listar_clientes("PJ");
+                        	
+                        	for(int i = 0;i < l.size();i++) {
+                        		
+                        		Cliente_PJ c = (Cliente_PJ) l.get(i);
+                        		if(c.get_cnpj().equals(doc)) {
+                        			for(int j = 0;j < c.get_lista_frota().size();j++) {
+                        				if(c.get_lista_frota().get(j).get_code().equals(code)){
+                        					c.get_lista_frota().get(j).add_veiculo(v);
+                        				}
+                        				
+                        				
+                        			}
+                        		}
+                        		
+                        	}	
+                        }
+                    
+    	
+				    	sc8.close();
+					}
+					else {
+						System.out.println("Não há seguradora");
+					}
+					
+				}
+				if(x == 3) {
+					//Cadastrar seguradora
+					
+					System.out.println("Nome: ");
+			    	Scanner sc4 = new Scanner(System.in);
+			    	String nome = sc4.next();
+			    	
+			    	System.out.println("Telefone: ");
+			    	Scanner sc5 = new Scanner(System.in);
+			    	String telefone = sc5.next();
+			    	
+			    	System.out.println("Email: ");
+			    	Scanner sc6 = new Scanner(System.in);
+			    	String email = sc6.next();
+			    	
+			    	System.out.println("Endereço: ");
+			    	Scanner sc7 = new Scanner(System.in);
+			    	String end = sc4.next();
+			    	
+			    	s = new Seguradora("54.812.000.0001-15",nome,telefone,email,end);
+			    	
+			    	sc4.close();
+                    sc5.close();
+                    sc6.close();
+                    sc7.close();
+					
+				}
+			
+			}
+		}
+		if(x == op2.getOperacao()) {
+			
+			System.out.println("Lista: ");
+			Scanner sc2 = new Scanner(System.in);
+			int x1 = sc2.nextInt();
+			
+			while(true) {
+				
+				if(x1 == 6){
+					break;
+				}
+				if(x1 == 1) {
+					//Listar clientes PF/PJ
+					System.out.println("Tipo do cliente a ser listado: ");
+			    	Scanner sc3 = new Scanner(System.in);
+			    	String tipo = sc3.next();
+			    	
+			    	if(tipo.equals("PF")){
+			    		System.out.println(s.listar_clientes("PF"));
+			    	}
+			    	if(tipo.equals("PJ")){
+			    		System.out.println(s.listar_clientes("PF"));
+			    	}
+				}
+				if(x1 == 2){
+					//Listar sinistros por seguradora
+					ArrayList<Cliente> l = s.listar_clientes();
+					for(int i = 0;i < l.size();i++) {
+						if(l.get(i).get_tipo() == 1) {
+							Cliente_PJ c = (Cliente_PJ) l.get(i);
+							System.out.println(s.get_sinistro(c));
+						}
+						if(l.get(i).get_tipo() == 0) {
+							Cliente_PF c = (Cliente_PF) l.get(i);
+							System.out.println(s.get_sinistro(c));
+						}
+					}
+				}
+				if(x1 == 3) {
+					//Listar sinistro por cliente
+					System.out.println("Documento do cliente: ");
+			    	Scanner sc3 = new Scanner(System.in);
+			    	String doc = sc3.next();
+			    	System.out.println("Tipo do cliente: ");
+			    	Scanner sc4 = new Scanner(System.in);
+			    	String tipo = sc3.next();
+			    	
+			    	if(tipo.equals("PF")) {
+			    		for(int i = 0;i < s.listar_clientes("PF").size();i++) {
+			    			Cliente_PF c = (Cliente_PF) s.listar_clientes("PF").get(i);
+			    			if(c.get_cpf().equals(doc)) {
+			    				System.out.println(s.get_sinistro(c));
+			    			}
+			    		}
+			    	}
+			    	if(tipo.equals("PJ")) {
+			    		for(int i = 0;i < s.listar_clientes("PJ").size();i++) {
+			    			Cliente_PJ c = (Cliente_PJ) s.listar_clientes("PJ").get(i);
+			    			if(c.get_cnpj().equals(doc)) {
+			    				System.out.println(s.get_sinistro(c));
+			    			}
+			    		}
+			    	}
+			    	
+			    	
+					
+				}
+				if(x1 == 4) {
+					//Listar veiculos por clientes
+					System.out.println("Documento do cliente: ");
+			    	Scanner sc3 = new Scanner(System.in);
+			    	String doc = sc3.next();
+			    	System.out.println("Tipo do cliente: ");
+			    	Scanner sc4 = new Scanner(System.in);
+			    	String tipo = sc3.next();
+			    	
+			    	if(tipo.equals("PF")) {
+			    		for(int i = 0;i < s.listar_clientes("PF").size();i++) {
+			    			Cliente_PF c = (Cliente_PF) s.listar_clientes("PF").get(i);
+			    			if(c.get_cpf().equals(doc)) {
+			    				System.out.println(c.get_lista_veiculos());
+			    			}
+			    		}
+			    	}
+			    	if(tipo.equals("PJ")) {
+			    		for(int i = 0;i < s.listar_clientes("PJ").size();i++) {
+			    			Cliente_PJ c = (Cliente_PJ) s.listar_clientes("PJ").get(i);
+			    			if(c.get_cnpj().equals(doc)) {
+			    				for(int j = 0;j < c.get_lista_frota().size();j++) {
+			    					System.out.println(c.get_veiculos_por_frota(c.get_lista_frota().get(j)));
+			    				}
+			    			}
+			    		}
+			    	}
+					
+				}
+				if(x1 == 5) {
+					//Listar veiculos por seguradora
+					for(int i = 0;i < s.listar_clientes().size();i++) {
+						
+						if(s.listar_clientes().get(i).get_tipo() == 1) {
+							Cliente_PJ c = (Cliente_PJ) s.listar_clientes().get(i);
+							for(int j = 0;j < c.get_lista_frota().size();j++) {
+		    					System.out.println(c.get_veiculos_por_frota(c.get_lista_frota().get(j)));
+		    				}
+						}
+						else {
+							Cliente_PF c = (Cliente_PF) s.listar_clientes().get(i);			    			
+			    			System.out.println(c.get_lista_veiculos());
+			    			
+						}
+						
+					}
+				}
+				}
+				
+			}
+		if(x == op3.getOperacao()) {
+			//EXCLUIR
+			System.out.println("Excluir: ");
+			Scanner sc2 = new Scanner(System.in);
+			int x1 = sc2.nextInt();
+			
+			while(true) {
+				if(x1 == 4) {
+					break;
+				}
+				if(x1 == 1) {
+					//Excluir cliente
+					
+					System.out.println("Documento do cliente: ");
+			    	Scanner sc3 = new Scanner(System.in);
+			    	String doc = sc3.next();
+			    	System.out.println("Tipo do cliente: ");
+			    	Scanner sc4 = new Scanner(System.in);
+			    	String tipo = sc3.next();
+			    	
+			    	if(tipo.equals("PF")) {
+			    		for(int i = 0;i < s.listar_clientes("PF").size();i++) {
+			    			Cliente_PF c = (Cliente_PF) s.listar_clientes("PF").get(i);	
+			    			if(c.get_cpf().equals(doc)) {
+			    				s.remover_cliente(c);
+			    			}
+			    		}
+			    	}
+			    	if(tipo.equals("PJ")) {
+			    		for(int i = 0;i < s.listar_clientes("PJ").size();i++) {
+			    			Cliente_PJ c = (Cliente_PJ) s.listar_clientes("PJ").get(i);	
+			    			if(c.get_cnpj().equals(doc)) {
+			    				s.remover_cliente(c);
+			    			}
+			    		}
+			    	}
+					
+				}
+				if(x1 == 2) {
+					//Excluir veiculo
+					System.out.println("Placa do veiculo: ");
+			    	Scanner sc5 = new Scanner(System.in);
+			    	String placa = sc5.next();
+					System.out.println("Documento do cliente: ");
+			    	Scanner sc3 = new Scanner(System.in);
+			    	String doc = sc3.next();
+			    	System.out.println("Tipo do cliente: ");
+			    	Scanner sc4 = new Scanner(System.in);
+			    	String tipo = sc3.next();
+			    	
+			    	if(tipo.equals("PF")) {
+			    		for(int i = 0;i < s.listar_clientes("PF").size();i++) {
+			    			Cliente_PF c = (Cliente_PF) s.listar_clientes("PF").get(i);	
+			    			if(c.get_cpf().equals(doc)) {
+			    				for(int j = 0;j < c.get_lista_veiculos().size();j++) {
+			    					if(c.get_lista_veiculos().get(j).get_placa().equals(placa)) {
+			    						c.remover_veiculo(c.get_lista_veiculos().get(j));
+			    					}
+			    				}
+			    			}
+			    		}
+			    	}
+			    	if(tipo.equals("PJ")) {
+			    		for(int i = 0;i < s.listar_clientes("PJ").size();i++) {
+			    			Cliente_PJ c = (Cliente_PJ) s.listar_clientes("PJ").get(i);	
+			    			if(c.get_cnpj().equals(doc)) {
+			    				for(int j = 0;j < c.get_lista_frota().size();j++) {
+			    					for(int k = 0;k < c.get_veiculos_por_frota(c.get_lista_frota().get(j)).size();k++) {
+			    						if(c.get_veiculos_por_frota(c.get_lista_frota().get(j)).get(k).get_placa().equals(placa)) 
+			    						{
+			    							c.atualizar_frota(c.get_lista_frota().get(j), c.get_veiculos_por_frota(c.get_lista_frota().get(j)).get(k));
+			    						}
+			    					}
+			    				}
+			    			}
+			    		}
+			    	}
+				}
+				/*if(x1 == 3){
+					//Excluir Sinistro
+					
+					System.out.println("Documento do cliente: ");
+			    	Scanner sc3 = new Scanner(System.in);
+			    	String doc = sc3.next();
+			    	System.out.println("Tipo do cliente: ");
+			    	Scanner sc4 = new Scanner(System.in);
+			    	String tipo = sc3.next();
+			    	System.out.println("id: ");
+			    	Scanner sc5 = new Scanner(System.in);
+			    	int id = sc5.nextInt();
+			    	
+			    	if(tipo.equals("PF")) {
+			    		for(int i = 0;i < s.listar_clientes("PF").size();i++) {
+			    			Cliente_PF c = (Cliente_PF) s.listar_clientes("PF").get(i);	
+			    			if(c.get_cpf().equals(doc)) {
+			    				s.remover_cliente(c);
+			    			}
+			    		}
+			    	}
+			    	if(tipo.equals("PJ")) {
+			    		for(int i = 0;i < s.listar_clientes("PJ").size();i++) {
+			    			Cliente_PJ c = (Cliente_PJ) s.listar_clientes("PJ").get(i);	
+			    			if(c.get_cnpj().equals(doc)) {
+			    				s.remover_cliente(c);
+			    			}
+			    		}
+			    	}
+					
+				}*/
+			}
+		}
+		if(x == op4.getOperacao()) {
+			//Gerar Sinistro
+			
+            if(s.get_inst() == 1) {
+            	//Há seguradora
+            	
+    	    	
+            	System.out.println("Data: ");
+		    	Scanner sc5 = new Scanner(System.in);
+		    	String data_str = sc5.next();
+		    	//data_str:xx/xx/xxxx
+		    	Date data = new Date(data_str.substring(0, 1),data_str.substring(3,4),data_str.substring(6,9));
+    	    
+    	    	
+    	    	System.out.println("Endereço: ");
+    	    	Scanner sc4 = new Scanner(System.in);
+    	    	String end = sc4.next();
+    	    	
+    	    	
+    	    	
+    	    	System.out.println("Documento do cliente: ");
+		    	Scanner sc6 = new Scanner(System.in);
+		    	String doc = sc6.next();
+		    	System.out.println("Tipo do cliente: ");
+		    	Scanner sc7 = new Scanner(System.in);
+		    	String tipo = sc7.next();
+		    	System.out.println("id do seguro: ");
+		    	Scanner sc8 = new Scanner(System.in);
+		    	int id = sc8.nextInt();
+		    	System.out.println("Documento do condutor: ");
+		    	Scanner sc9 = new Scanner(System.in);
+		    	String doc2 = sc9.next();
+		    	
+		    	if(tipo.equals("PF")) {
+		    		for(int i = 0;i < s.listar_clientes("PF").size();i++) {
+		    			Cliente_PF c = (Cliente_PF) s.listar_clientes("PF").get(i);	
+		    			if(c.get_cpf().equals(doc)) {
+		    				ArrayList<Seguro_PF> seguros = s.get_seguros_cliente(c);
+		    				for(int j = 0;j < seguros.size();j++) {
+		    					if(seguros.get(i).get_id() == id) {
+		    						ArrayList<Condutor> condutores  = seguros.get(i).get_listaCondutores();
+		    						for(int k = 0;k < condutores.size();k++) {
+		    							if(condutores.get(k).get_cpf().equals(doc2)){
+		    								seguros.get(i).gerarSinistro(data, end, condutores.get(k));
+		    							}
+		    						}
+		    					}
+		    				}
+		    			}
+		    		}
+		    	}
+		    	if(tipo.equals("PJ")) {
+		    		for(int i = 0;i < s.listar_clientes("PJ").size();i++) {
+		    			Cliente_PJ c = (Cliente_PJ) s.listar_clientes("PJ").get(i);	
+		    			if(c.get_cnpj().equals(doc)) {
+		    				ArrayList<Seguro_PJ> seguros = s.get_seguros_cliente(c);
+		    				for(int j = 0;j < seguros.size();j++) {
+		    					if(seguros.get(i).get_id() == id) {
+		    						ArrayList<Condutor> condutores  = seguros.get(i).get_listaCondutores();
+		    						for(int k = 0;k < condutores.size();k++) {
+		    							if(condutores.get(k).get_cpf().equals(doc2)){
+		    								seguros.get(i).gerarSinistro(data, end, condutores.get(k));
+		    							}
+		    						}
+		    					}
+		    				}
+		    			}
+		    		}
+		    	}
+            }
+            else {
+            	System.out.println("Não há seguradora");
+            }
+		}
+		/*if(x == op5.getOperacao()) {
+			//Transferir seguro
+			
+			System.out.println("Index cliente 1: ");
+	    	Scanner sc3 = new Scanner(System.in);
+	    	int idx_1 = sc3.nextInt();
+	    	
+	    	System.out.println("Index cliente 2: ");
+	    	Scanner sc4 = new Scanner(System.in);
+	    	int idx_2 = sc4.nextInt();
+	    	
+	    	s.transferir_seguro(s.index_cliente(idx_1),s.index_cliente(idx_2));
+			
+		}*/
+		if(x == op6.getOperacao()){
+			//Calcular receita
+			s.calcular_receita();//atualizar dados
+			System.out.println(s.calcular_receita());
+			
+		}
+			
+		}
 		
 	}
 

@@ -15,6 +15,9 @@ public class Seguradora {
 	private static ArrayList<Seguro> lista_seguro = new ArrayList<>();
 	private static ArrayList<Cliente> lista_clientes = new ArrayList<>();
 	
+	//
+	private int inst = 0;
+	
 	
 	
 	
@@ -25,6 +28,9 @@ public class Seguradora {
 		_telefone = telefone;
 		_email = email;
 		_endereco = endereco;
+	}
+	public Seguradora(String cnpj){
+		_cnpj = cnpj;
 	}
 	
 	public String get_cnpj(){
@@ -42,7 +48,9 @@ public class Seguradora {
 	public String get_endereco() {
 		return _endereco;
 	}
-	
+	public int get_inst() {
+		return inst;
+	}
 
 	public void set_nome(String nome) {
 		_nome = nome;
@@ -81,6 +89,9 @@ public class Seguradora {
 		}	
 		//teoricamente alguma exception aqui
 		return null;
+	}
+	public ArrayList<Cliente> listar_clientes() {
+		return lista_clientes;
 	}
 	
 	//
