@@ -13,7 +13,7 @@ public class Cliente_PJ extends Cliente{
 		_cnpj = cnpj;
 		data_fundacao = data;
 	}
-	
+	//
 	public String get_cnpj() {
 		return _cnpj;
 	}
