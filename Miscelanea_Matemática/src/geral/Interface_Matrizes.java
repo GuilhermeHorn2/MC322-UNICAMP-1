@@ -61,6 +61,7 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 		subm_a.setBackground(Color.green);
 		subm_a.addActionListener(this);
 		subm_a.setBounds(0,0, 150, 50);
+		subm_a.setFocusable(false);
 
 		
 		linha_a = new JTextField("Sintaxe: 1,2,3,4,...");
@@ -82,6 +83,7 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 		subm_b.setBackground(Color.green);
 		subm_b.addActionListener(this);
 		subm_b.setBounds(0,100, 150, 50);
+		subm_a.setFocusable(false);
 
 		
 		linha_b = new JTextField("Sintaxe: 1,2,3,4,...");
@@ -95,6 +97,7 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 		fechar_b.setBackground(Color.green);
 		fechar_b.addActionListener(this);
 		fechar_b.setBounds(0,200, 150, 50);
+		fechar_b.setFocusable(false);
 		this.add(fechar_b);
 		
 		//Multiplicacao
@@ -103,6 +106,7 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 		mult_AB.setBackground(Color.green);
 		mult_AB.addActionListener(this);
 		mult_AB.setBounds(50,300, 150, 50);
+		mult_AB.setFocusable(false);
 		this.add(mult_AB);
 		
 		//Inverter
@@ -111,6 +115,7 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 	    inv.setBackground(Color.green);
 		inv.addActionListener(this);
 		inv.setBounds(50,400, 150, 50);
+	    inv.setFocusable(false);
 		this.add(inv);
 		
 		//Determinante
@@ -119,6 +124,7 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 		det.setBackground(Color.green);
 		det.addActionListener(this);
 		det.setBounds(250,300, 150, 50);
+		det.setFocusable(false);
 		this.add(det);
 		
 		//Reset
@@ -127,6 +133,7 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 		reset.setBackground(Color.green);
 		reset.addActionListener(this);
 		reset.setBounds(250,400, 150, 50);
+		reset.setFocusable(false);
 		this.add(reset);
 		
 		//this.pack();
@@ -137,11 +144,7 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		/*ArrayList<ArrayList<Double>> a = new ArrayList<>();
-		ArrayList<ArrayList<Double>> b = new ArrayList<>();*/
 		
-		/*Matriz A = null;
-		Matriz B = null;*/
 		//1)Setando as matrizes:
 		
 		if(e.getSource() == subm_a) {
@@ -159,6 +162,7 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 					System.out.println("Sinatxe Invalida.");
 				}
 			}
+			linha_a.setText("");
 			
 		}
 		if(e.getSource() == subm_b) {
@@ -177,6 +181,7 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 					System.out.println("Sinatxe Invalida.");
 				}
 			}
+			linha_b.setText("");
 			
 		}
 		

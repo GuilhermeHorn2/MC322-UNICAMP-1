@@ -29,6 +29,7 @@ public class Interface_Polinomios extends JFrame implements ActionListener{
 		button = new JButton("Raizes reais");
 		button.setBackground(Color.green);
 		button.addActionListener(this);
+		button.setFocusable(false);
 
 		
 		pol = new JTextField("Sintaxe: ax^n + bx^k + ... + c");
@@ -48,6 +49,7 @@ public class Interface_Polinomios extends JFrame implements ActionListener{
 			Polinomio pol1 = new Polinomio(s);
 			Aproximar_polinomio aprox1 = new Aproximar_polinomio(pol1);
 			System.out.println("Raizes Reais de: (" + s +") -->"+aprox1.metodo_generalizado());
+			pol.setText("");
 		}
 		
 	}

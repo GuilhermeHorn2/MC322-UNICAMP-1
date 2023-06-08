@@ -16,17 +16,6 @@ public class Matriz{
 	
 	public Matriz(ArrayList<ArrayList<Double>> val) throws TamanhoDistintoException{
 		
-		/*for(int i = 0;i < n;i++) {
-			matriz.add(new ArrayList<>());
-			for(int j = 0;j < m;j++) {
-				
-				System.out.println("("+i+","+j+")");
-				Scanner sc = new Scanner(System.in);
-				int r = sc.nextInt();
-				
-			}
-		}*/
-		
 		//todas as sub-arrays precisam ter o mesmo tamanho,por definicao
 		int m = val.get(0).size();
 		for(int i = 1;i < val.size();i++){
