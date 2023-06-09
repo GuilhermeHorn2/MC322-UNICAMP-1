@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -48,7 +49,10 @@ public class Interface_Polinomios extends JFrame implements ActionListener{
 			String s = this.pol.getText();
 			Polinomio pol1 = new Polinomio(s);
 			Aproximar_polinomio aprox1 = new Aproximar_polinomio(pol1);
-			System.out.println("Raizes Reais de: (" + s +") -->"+aprox1.metodo_generalizado());
+			ArrayList<Double> raizes = aprox1.metodo_generalizado();
+			System.out.println("Raizes Reais de: (" + s +") -->"+raizes);
+			Pol_log ger = new Pol_log("src\\logPolinomios.csv",s,raizes);
+			ger.gravar_log();
 			pol.setText("");
 		}
 		

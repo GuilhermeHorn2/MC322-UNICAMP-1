@@ -2,7 +2,6 @@ package geral;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -74,6 +73,7 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 		fechar_a.setBackground(Color.green);
 		fechar_a.addActionListener(this);
 		fechar_a.setBounds(200,200, 150, 50);
+		fechar_a.setFocusable(false);
 		
 		this.add(fechar_a);
 		
@@ -83,13 +83,14 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 		subm_b.setBackground(Color.green);
 		subm_b.addActionListener(this);
 		subm_b.setBounds(0,100, 150, 50);
-		subm_a.setFocusable(false);
+		subm_b.setFocusable(false);
 
 		
 		linha_b = new JTextField("Sintaxe: 1,2,3,4,...");
 		linha_b.setPreferredSize(new Dimension(250,40));
 		//linha_b.setSize(200, 50);
 		linha_b.setBounds(160, 100, 200, 50);
+		//linha_b.setFocusable(false);
 		this.add(subm_b);
 		this.add(linha_b);
 		
@@ -192,13 +193,14 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 		if(e.getSource() == fechar_a){
 			//System.out.println(a);
 			if(a.size() != 0){
-				
 				try {
 					ArrayList<ArrayList<Double>> temp = new ArrayList<>();
 					temp.addAll(a);
 					A = new Matriz(temp);
 					System.out.println("Matriz A:");
 					A.print_matriz();
+					Matriz_log log = new Matriz_log("src\\logMatrizes.csv",temp,b);
+					log.Gravar_matriz_A();
 				}
 				catch(TamanhoDistintoException tde) {
 					System.out.println("Entrada Invalida.");
@@ -210,13 +212,14 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 		if(e.getSource() == fechar_b){
 			
 			if(b.size() != 0){
-				
 				try {
 					ArrayList<ArrayList<Double>> temp = new ArrayList<>();
 					temp.addAll(b);
 					B = new Matriz(temp);
 					System.out.println("Matriz B:");
 					B.print_matriz();
+					Matriz_log log = new Matriz_log("src\\logMatrizes.csv",a,temp);
+					log.Gravar_matriz_B();
 				}
 				catch(TamanhoDistintoException tde) {
 					System.out.println("Entrada Invalida.");
@@ -233,7 +236,11 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 			
 			if(A != null && B != null){
 				System.out.println("AxB:");
-				A.multiplicar(B).print_matriz();
+				Matriz C = A.multiplicar(B);
+				ArrayList<ArrayList<Double>> mult = C.get_matriz();
+				C.print_matriz();
+				Matriz_log log = new Matriz_log("src\\logMatrizes.csv",a,b,mult);
+				log.Gravar_mult();
 			}
 			else {
 				System.out.println("Multiplicacao Invalida");
@@ -248,16 +255,22 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 			if(A != null) {
 				System.out.println("Inversa de A:");
 				Matriz temp = A.calcular_inversa();
+				ArrayList<ArrayList<Double>> inv = temp.get_matriz();
 				if(temp != null) {
 					temp.print_matriz();
 				}
+				Matriz_log log = new Matriz_log("src\\logMatrizes.csv",a,inv);
+				log.Gravar_inversa();
 			}
 			if(B != null) {
 				System.out.println("Inversa de b:");
 				Matriz temp = B.calcular_inversa();
+				ArrayList<ArrayList<Double>> inv = temp.get_matriz();
 				if(temp != null) {
 					temp.print_matriz();
 				}
+				Matriz_log log = new Matriz_log("src\\logMatrizes.csv",a,inv);
+				log.Gravar_inversa();
 			}
 			
 		}
@@ -266,10 +279,16 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 		
 		if(e.getSource() == det){
 			if(A != null) {
-				System.out.println("det(A) = "+A.calcular_determinante(A));
+				double det = A.calcular_determinante(A);
+				Matriz_log log = new Matriz_log("src\\logMatrizes.csv",a,det);
+				log.Gravar_det_A();
+				System.out.println("det(A) = "+det);
 			}
 			if(B != null) {
-				System.out.println("det(B) = "+B.calcular_determinante(B));
+				double det = B.calcular_determinante(B);
+				Matriz_log log = new Matriz_log("src\\logMatrizes.csv",b,det);
+				log.Gravar_det_B();
+				System.out.println("det(B) = "+det);
 			}
 		}
 		
