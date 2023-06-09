@@ -1,12 +1,13 @@
 package lab06;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+public class AppMain_ {
 
-
-public class AppMain {
-	
 	public static class validacao{		
 		private final String _cpf;
 		private final String _cnpj;
@@ -180,100 +181,169 @@ public class AppMain {
 		}
 			
 	}
-
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		
-		//data atual:
 		
-		Date atual = new Date("19","05","2023");
+		/*
+		 * As classes do tipo Gerador_*,serao classes que implemenam I_Arquivo e serao responsaveis por pegar um file csv
+		 * e instanciar os objetos,as classes Gravar_* sao as classes que vao gerar os arquivos com os dados dos seguros e sinistros
+		 */
 		
-		//Seguradora:
+		//1)Lendo os arquivos
 		
+		String pf = "src\\clientesPF.csv";
+		Gerador_PF ger1 = new Gerador_PF(pf);
+		ger1.ler_arquivo();
+		//System.out.println(ger1.get_clientes());
+		
+		String pj = "src\\clientesPJ.csv";
+		Gerador_PJ ger2 = new Gerador_PJ(pj);
+		ger2.ler_arquivo();
+		//System.out.println(ger2.get_clientes());
+		
+		String conds = "src\\condutores.csv";
+		Gerador_Condutor ger3 = new Gerador_Condutor(conds);
+		ger3.ler_arquivo();
+		//System.out.println(ger3.get_condutores());
+		
+		String vcs = "src\\veiculos.csv";
+		Gerador_Veiculos ger4 = new Gerador_Veiculos(vcs); 
+		ger4.ler_arquivo();
+		//System.out.println(ger4.get_veiculos());
+		
+		String frts = "src\\veiculos.csv";
+		Gerador_Frota ger5 = new Gerador_Frota(frts);
+		ger5.ler_arquivo();
+		//System.out.println(ger5.get_placas());
+		
+		//1)
+		
+		//2)Adicionando os veiculos e frotas nos respectivos clientes
+		
+		//Veiculo em Clientes_PF:
+		ArrayList<Cliente_PF> clientes_pf = ger1.get_clientes();
+		ArrayList<String> placas = ger1.get_placas();
+		ArrayList<Veiculo> veiculos = ger4.get_veiculos();
+		for(int i = 0;i < placas.size();i++){
+			String placa = placas.get(i);
+			for(int j = 0;j < veiculos.size();j++) {
+				Veiculo v = veiculos.get(j);
+				if(v.get_placa().equals(placa)){
+					clientes_pf.get(i).cadastrar_veiculo(v);
+				}
+			}
+		}
+		
+		//Veiculos em Frotas:
+		ArrayList<Frota> frotas = ger5.get_frotas();
+		placas = ger5.get_placas();
+		
+		for(int i = 0;i < placas.size();i++) {
+			
+			String placa = placas.get(i);
+			for(int j = 0;j < veiculos.size();j++){
+				Veiculo v = veiculos.get(j);
+				if(v.get_placa().equals(placa)){
+					frotas.get(i).add_veiculo(v);
+				}
+			}
+		}
+		
+		//Frotas em Clientes_PJ
+		
+		ArrayList<Cliente_PJ> clientes_pj = ger2.get_clientes();
+		ArrayList<String> id_frota =  ger2.get_id();
+		for(int i = 0;i < frotas.size();i++){
+			Frota f = frotas.get(i);
+			for(int j = 0;j < id_frota.size();j++){
+				String id = id_frota.get(j);
+				if(f.get_code().equals(id)){
+					clientes_pj.get(i).cadastrar_frota(f);
+				}
+			}
+		}
+		
+		//2)
+		
+		//3)Criando seguros para os clientes e sinistros para os condutores
+		
+		//1 Seguro_PF e 1 Seguro_PJ,cada um tera 1 sinistro 
+		ArrayList<Condutor> condutores = ger3.get_condutores();
+		Cliente_PF pf_ex = clientes_pf.get(1);
+		Cliente_PJ pj_ex = clientes_pj.get(1);
+		Veiculo v_ex = veiculos.get(1);
+		Frota f_ex = frotas.get(1);
+		Condutor ex_1 = condutores.get(1);
+		Condutor ex_2 = condutores.get(2);
+		Condutor ex_3 = condutores.get(3);
+		
+		Date atual = new Date("09","06","2023");
 		Seguradora seguradora = new Seguradora("54.812.000.0001-15","Pedro Seguros","telefone","email","endereco");
 		
-		//veiculos:
+		seguradora.gerar_seguro(pf_ex, v_ex, new Date("2023-07-01"), new Date("2024-07-01"), atual);
+		seguradora.gerar_seguro(pj_ex, f_ex, new Date("2023-08-07"), new Date("2026-03-11"), atual);
 		
-		Veiculo v1 = new Veiculo("placa","marca","modelo",2020);
-		Veiculo v2 = new Veiculo("placa","marca","modelo",2019);
+		Seguro_PF seg_pf = seguradora.get_seguros_cliente(pf_ex).get(0);
+		Seguro_PJ seg_pj = seguradora.get_seguros_cliente(pj_ex).get(0);
+		seg_pf.autorizarCondutor(ex_1);
+		seg_pj.autorizarCondutor(ex_1);
+		seg_pj.autorizarCondutor(ex_2);
+		seg_pj.autorizarCondutor(ex_3);
 		
-		//instanciando 1 cliente pf
+		seg_pf.gerarSinistro(atual, "Endereco", ex_1);
+		seg_pj.gerarSinistro(atual, "Endereco", ex_2);
 		
-		Date nasc_pf = new Date("20","01","1990");
-		Cliente_PF pf = new Cliente_PF("504.309.690-07","genero","educacao",nasc_pf,"nome","telefone","endereco","email");
-		pf.cadastrar_veiculo(v1);
-		validacao val = new validacao("504.309.690-07","","nome");
-		if(val.validaCPF(pf.get_cpf())) {
-			seguradora.cadastrar_cliente(pf);
-		}
+		Sinistro sin1 = seg_pf.get_listaSinistros().get(0);
+		Sinistro sin2 = seg_pj.get_listaSinistros().get(0);
 		
-		Date inicio = atual;
-		Date fim = new Date("19","05","2025");
+		//3)
 		
-		//seguro pf
-		seguradora.gerar_seguro(pf, v1, inicio, fim, atual);
+		//4)Gerando os arquivos csv com os dados dos Seguros e Sinistros	
 		
-		Date nasc = new Date("20","01","1991");
-		Condutor Pedro_conducoes = new Condutor("845.857.770-40","nome","tel","end","email",nasc);
+		ArrayList<Seguro> seguros = new ArrayList<>();
+		seguros.add(seg_pj);
+		seguros.add(seg_pf);
 		
-		//gerando 1 sinistro do cliente pf
+		String file1 = "src\\Seguros1.csv";
+		Gravar_Seguro grav1 = new Gravar_Seguro(file1,seguros);
+		grav1.gravar_arquivo();
 		
-		ArrayList<Seguro_PF> segs_pf = seguradora.get_seguros_cliente(pf);
-		for(int i = 0;i < segs_pf.size();i++){
-			
-			Seguro_PF seg = segs_pf.get(i);
-			val = new validacao("845.857.770-40","","nome"); 
-			seg.gerarSinistro(atual, "endereco", Pedro_conducoes);
-			seg.set_valorMensal(seg.calcularValor(atual));
-			
-		}
+		ArrayList<Sinistro> sinistros = new ArrayList<>();
+		sinistros.add(sin1);
+		sinistros.add(sin2);
 		
-		//instanciando 1 cliente pj
+		String file2 = "src\\Sinistros1.csv";
+		Gravar_Sinistro grav2 = new Gravar_Sinistro(file2,sinistros);
+		grav2.gravar_arquivo();
 		
-		Date fund = new Date("12","02","2001");
-		Cliente_PJ pj = new Cliente_PJ("62.045.674.0001-60",fund,"nome","telefone","end","email");
-		val = new validacao("","62.045.674.0001-60","nome");
-		if(val.validaCNPJ("62.045.674.0001-60") && val.validaNome("nome")){
-			seguradora.cadastrar_cliente(pj);
-		}
+		//4)
 		
-		Frota f = new Frota("code");
-		f.add_veiculo(v1);
-		f.add_veiculo(v2);
-		
-		//gerando seguro pj
-		seguradora.gerar_seguro(pj, f, inicio, fim, atual);
-		
-		
-		//gerando 1 sinistro pj
-		
-		ArrayList<Seguro_PJ> segs_pj = seguradora.get_seguros_cliente(pj);
-		for(int i = 0;i < segs_pf.size();i++){
-			
-			Seguro_PJ seg = segs_pj.get(i);
-			val = new validacao("845.857.770-40","","nome"); 
-			seg.gerarSinistro(atual, "endereco", Pedro_conducoes);
-			seg.set_valorMensal(seg.calcularValor(atual));
-		}
-		
-		
+		//5)Exemplos dos metodos
 		
 		//listar clientes
 		System.out.println(seguradora.listar_clientes("PF"));
 		System.out.println(seguradora.listar_clientes("PJ"));
-		
+				
 		//get sinistros por cliente pf
-		System.out.println(seguradora.get_sinistro(pf));
-		System.out.println(seguradora.get_sinistro(pj));
-		
+		System.out.println(seguradora.get_sinistro(pf_ex));
+		System.out.println(seguradora.get_sinistro(pj_ex));
+				
 		/*
 		 * Os ids podem ser os mesmos,pois os sinsitros estao em seguros distintos.
 		 */
-		
+				
 		//calcular receita
 		System.out.println(seguradora.calcular_receita());
 		
+		
+		menu();
+		
+		//5)
+
+
 	}
+	
 	public static void menu() {
 		MenuOperacoes op1 = MenuOperacoes.CADASTROS;
 		MenuOperacoes op2 = MenuOperacoes.LISTAR;

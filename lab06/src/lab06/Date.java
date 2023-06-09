@@ -13,6 +13,37 @@ public class Date {
 		s[2] = ano;
 	}
 	
+	public Date(String s) {
+		String ano = "";
+		String mes = "";
+		String dia = "";
+		StringBuilder data = new StringBuilder();
+		int c = 0;
+		for(int i = 0;i < s.length();i++){
+			String x = s.substring(i, i+1);
+			if(x.equals("-")){
+				if(c == 0){
+					ano = data.toString();
+				}
+				if(c == 1) {
+					mes = data.toString();
+				}
+				data = new StringBuilder();
+				c++;
+				continue;
+			}
+			data.append(x);
+		}
+		dia = data.toString();
+		
+		this.s[0] = dia;
+		this.s[1] = mes;
+		this.s[2] = ano;
+	}
+	
+	
+	public Date() {}
+	
 	/*get*/
 	public String getDate() {
 		//quero retornar algo do tipo:xx/xx/xxxx

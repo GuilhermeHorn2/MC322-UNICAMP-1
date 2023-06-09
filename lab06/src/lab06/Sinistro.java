@@ -1,6 +1,6 @@
 package lab06;
 
-public class Sinistro {
+public class Sinistro implements I_Arquivo{
 	
 	private final int _id;
 	private Date _data;
@@ -55,6 +55,24 @@ public class Sinistro {
 		res.append("/Condutor: " + this.get_condutor());
 		res.append("/Seguro: " + this.get_seguro());
 		return res.toString();
+	}
+	
+	/*Os arquivos serao lidos nas classes:clientePF/PJ,condutor,frota,veiculos
+	 * Já as classes Seguradora e Sinistro retornarao os arquivos com os dados,entao em algumas classes que implemetam a interface
+	 * de leitura/escrita algum metodo ficara vazio.
+	 * 
+	 */
+
+	@Override
+	public boolean gravar_arquivo() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public String ler_arquivo() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

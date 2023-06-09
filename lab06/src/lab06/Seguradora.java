@@ -126,7 +126,7 @@ public class Seguradora {
 		if(validar_datas(inicio,fim)) {
 			lista_seguro.add(seg);
 			seg.set_valorMensal(seg.calcularValor(atual));
-			System.out.println("valor pf: "+seg.get_valorMensal());
+			//System.out.println("valor pf: "+seg.get_valorMensal());
 			gerou = true;
 		}
 		return gerou;	
@@ -144,7 +144,7 @@ public class Seguradora {
 			//System.out.println("---");
 			lista_seguro.add(seg);
 			seg.set_valorMensal(seg.calcularValor(atual));
-			System.out.println("valor pj: "+seg.get_valorMensal());
+			//System.out.println("valor pj: "+seg.get_valorMensal());
 			//System.out.println("---");
 			gerou = true;
 		}
@@ -298,6 +298,8 @@ public class Seguradora {
 		res.append("/Endereco: " + this.get_endereco());
 		return res.toString();
 	}
+	
+	
 
 	
 	

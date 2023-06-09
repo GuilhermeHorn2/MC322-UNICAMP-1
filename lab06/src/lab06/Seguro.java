@@ -2,7 +2,7 @@ package lab06;
 
 import java.util.ArrayList;
 
-public abstract class Seguro {
+public abstract class Seguro{
 
 	private final int _id;
 	private Date datainicio;
