@@ -31,7 +31,7 @@ public class Aproximar_polinomio extends Aproximacao{
 			if(derivada_pol_x == 0) {
 				
 				/*
-				 * Gambiarra: se a derivada for uma linha horizontal(coef angula 0),o métode de Newton fica meio estranho
+				 *Se a derivada for uma linha horizontal(coef angular 0),o metodo de Newton fica meio estranho
 				 * entao oque eu fiz foi deslocar um pouco o ponto
 				 */
 				raiz -= 0.01;
@@ -64,7 +64,7 @@ public class Aproximar_polinomio extends Aproximacao{
 			if(derivada_pol_x == 0) {
 				
 				/*
-				 * Gambiarra: se a derivada for uma linha horizontal(coef angula 0),o métod de Newton fica meio estranho
+				 *Se a derivada for uma linha horizontal(coef angular 0),o metodo de Newton fica meio estranho
 				 * entao oque eu fiz foi deslocar um pouco o ponto
 				 */
 				
@@ -125,7 +125,7 @@ public class Aproximar_polinomio extends Aproximacao{
 				/*
 				 * Apos alguns testes eu percebi que multiplicar o valor por 0.8 e um bom valor para deslocar apos achar um ponto
 				 * de sela,esse valor foi determinado expérimentalmente,pode haver alguma forma de achar um valor otimizado
-				 * mas esse parametro faz seu trabalho.Gambiarra!.
+				 * mas esse parametro faz seu trabalho.
 				 */
 			
 				
