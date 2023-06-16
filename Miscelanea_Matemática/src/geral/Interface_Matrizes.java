@@ -235,12 +235,17 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 		if(e.getSource() == mult_AB){
 			
 			if(A != null && B != null){
-				System.out.println("AxB:");
 				Matriz C = A.multiplicar(B);
-				ArrayList<ArrayList<Double>> mult = C.get_matriz();
-				C.print_matriz();
-				Matriz_log log = new Matriz_log("src\\logMatrizes.csv",a,b,mult);
-				log.Gravar_mult();
+				if(C != null) {
+					System.out.println("AxB:");
+					ArrayList<ArrayList<Double>> mult = C.get_matriz();
+					C.print_matriz();
+					Matriz_log log = new Matriz_log("src\\logMatrizes.csv",a,b,mult);
+					log.Gravar_mult();
+				}
+				else {
+					System.out.println("Multiplicacao Invalida.");
+				}
 			}
 			else {
 				System.out.println("Multiplicacao Invalida");
@@ -255,40 +260,48 @@ public class Interface_Matrizes extends JFrame implements ActionListener{
 			if(A != null) {
 				System.out.println("Inversa de A:");
 				Matriz temp = A.calcular_inversa();
-				ArrayList<ArrayList<Double>> inv = temp.get_matriz();
 				if(temp != null) {
+					ArrayList<ArrayList<Double>> inv = temp.get_matriz();
 					temp.print_matriz();
+					Matriz_log log = new Matriz_log("src\\logMatrizes.csv",a,inv);
+					log.Gravar_inversa();
 				}
-				Matriz_log log = new Matriz_log("src\\logMatrizes.csv",a,inv);
-				log.Gravar_inversa();
+				
 			}
 			if(B != null) {
-				System.out.println("Inversa de b:");
+				System.out.println("Inversa de B:");
 				Matriz temp = B.calcular_inversa();
-				ArrayList<ArrayList<Double>> inv = temp.get_matriz();
 				if(temp != null) {
+					ArrayList<ArrayList<Double>> inv = temp.get_matriz();
 					temp.print_matriz();
+					Matriz_log log = new Matriz_log("src\\logMatrizes.csv",a,inv);
+					log.Gravar_inversa();
 				}
-				Matriz_log log = new Matriz_log("src\\logMatrizes.csv",a,inv);
-				log.Gravar_inversa();
+			
 			}
 			
 		}
-		
+		///
 		//5)Determinante
 		
 		if(e.getSource() == det){
 			if(A != null) {
-				double det = A.calcular_determinante(A);
-				Matriz_log log = new Matriz_log("src\\logMatrizes.csv",a,det);
-				log.Gravar_det_A();
-				System.out.println("det(A) = "+det);
+				if(A.get_matriz().size() != 0 && A.get_matriz().get(0).size() != 0) {
+					double det = A.calcular_determinante(A);
+					Matriz_log log = new Matriz_log("src\\logMatrizes.csv",a,det);
+					log.Gravar_det_A();
+					System.out.println("det(A) = "+det);
+				}
+			
 			}
 			if(B != null) {
-				double det = B.calcular_determinante(B);
-				Matriz_log log = new Matriz_log("src\\logMatrizes.csv",b,det);
-				log.Gravar_det_B();
-				System.out.println("det(B) = "+det);
+				if(B.get_matriz().size() != 0 && B.get_matriz().get(0).size() != 0) {
+					double det = B.calcular_determinante(B);
+					Matriz_log log = new Matriz_log("src\\logMatrizes.csv",b,det);
+					log.Gravar_det_B();
+					System.out.println("det(B) = "+det);
+				}
+				
 			}
 		}
 		
