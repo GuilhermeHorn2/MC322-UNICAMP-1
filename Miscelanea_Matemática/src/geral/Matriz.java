@@ -5,7 +5,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
-
+//
 public class Matriz{
 	
 	private ArrayList<ArrayList<Double>> matriz = new ArrayList<>();
@@ -44,6 +44,12 @@ public class Matriz{
 	}
 	
 	public Matriz multiplicar(Matriz B){
+		
+		//AxB e BxC
+		
+		if(M != B.N) {
+			return null;
+		}
 		
 		//try catch no prod interno
 		
